@@ -11,7 +11,8 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, loader: 'url-loader?limit=100000' },
-            { test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) }
+            { test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) },
+            { test: /\.html$/, loader: 'raw' }
         ]
     },
     entry: {
@@ -32,6 +33,11 @@ module.exports = {
             'es6-promise',
             'jquery',
             'zone.js',
+
+            'powel-powelui',
+            'powel-powelui/dist/powel-ui.css',
+            'powel-powelui/dist/fonts/powel-icons.ttf',
+            'powel-powelui/dist/fonts/powel-icons.woff'
         ]
     },
     output: {
