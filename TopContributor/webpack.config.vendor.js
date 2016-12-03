@@ -31,6 +31,7 @@ module.exports = {
             'es6-promise',
             'jquery',
             'zone.js',
+            'bootstrap',
             'powel-powelui',
             'powel-powelui/dist/powel-ui.css',
             'powel-powelui/dist/fonts/powel-icons.ttf',

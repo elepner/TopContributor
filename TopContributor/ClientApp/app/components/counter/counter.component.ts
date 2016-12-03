@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
     template: require('./counter.component.html')
 })
 export class CounterComponent {
-    public currentCount = 0;
+    public currentCount = 3;
 
     public incrementCounter() {
-        this.currentCount+=3;
+        this.currentCount++;
     }
 }
