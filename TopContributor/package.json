@@ -1,6 +1,10 @@
 {
   "name": "Angular2Spa",
   "version": "0.0.0",
+  "scripts": {
+    "restore_all": "dotnet restore && npm run restore_webpack",
+    "restore_webpack": "webpack --config webpack.config.vendor.js && webpack --config webpack.config.js "
+  },
   "dependencies": {
     "@angular/common": "2.0.0",
     "@angular/compiler": "2.0.0",
