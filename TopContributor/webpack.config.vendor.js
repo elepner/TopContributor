@@ -27,8 +27,6 @@ module.exports = {
             '@angular/platform-server',
             'angular2-universal',
             'angular2-universal-polyfills',
-            'bootstrap',
-            'bootstrap/dist/css/bootstrap.css',
             'es6-shim',
             'es6-promise',
             'jquery',
@@ -36,13 +34,14 @@ module.exports = {
             'powel-powelui',
             'powel-powelui/dist/powel-ui.css',
             'powel-powelui/dist/fonts/powel-icons.ttf',
-            'powel-powelui/dist/fonts/powel-icons.woff'
+            'powel-powelui/dist/fonts/powel-icons.woff',
+            'powel-powelui/dist/fonts/powel-ui-webfonts.woff.css'
         ]
     },
     output: {
         path: path.join(__dirname, 'wwwroot', 'dist'),
         filename: '[name].js',
-        library: '[name]_[hash]',
+        library: '[name]_[hash]'
     },
     plugins: [
         extractCSS,

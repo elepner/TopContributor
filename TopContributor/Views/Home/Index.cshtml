@@ -7,4 +7,6 @@
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script>
+    <script>!function (e) { "use strict"; function t(t, n, s) { var o = navigator.userAgent, a = !e.addEventListener || o.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !o.match(/Chrome/); if (!a) { var r = {}; try { r = localStorage || {} } catch (i) { } var c = "x-font-" + t, u = c + "url", d = c + "css", l = r[u], f = r[d], p = document.createElement("style"); if (p.rel = "stylesheet", document.head.appendChild(p), f && l === n) p.textContent = f; else { var h = new XMLHttpRequest; h.open("GET", n), h.onload = function () { h.status >= 200 && h.status < 400 && (r[u] = n, r[d] = h.responseText, s || (p.textContent = h.responseText)) }, h.send() } } } t("OpenSans", "/dist/powel-ui-webfonts.woff.css") }(this);</script>
+
 }
