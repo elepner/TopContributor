@@ -7,7 +7,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>d75dc5e5-cab2-41a9-87d5-d210d9035129</ProjectGuid>
+    <ProjectGuid>b287ea3b-4c07-4655-bddf-6ec80db86409</ProjectGuid>
     <RootNamespace>TopContributor</RootNamespace>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>

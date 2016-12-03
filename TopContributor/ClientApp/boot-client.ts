@@ -4,6 +4,8 @@ import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
 import 'bootstrap';
 
+var PowelUI = require('powel-powelui');
+
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {
     module['hot'].accept();

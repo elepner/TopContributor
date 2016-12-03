@@ -33,7 +33,6 @@ module.exports = {
             'es6-promise',
             'jquery',
             'zone.js',
-
             'powel-powelui',
             'powel-powelui/dist/powel-ui.css',
             'powel-powelui/dist/fonts/powel-icons.ttf',
