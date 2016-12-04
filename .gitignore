@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 *.local.json
 launchSettings.json
+dump.json
+authors.json
