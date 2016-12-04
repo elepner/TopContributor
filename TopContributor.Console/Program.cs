@@ -69,7 +69,7 @@ namespace TopContributor.Console
                 commits.GroupBy(x => x.Project)
                     .Select(x => new {Name = x.Key, Count = x.Count()}).OrderByDescending(x => x.Count).Take(10);
 
-            System.Console.WriteLine("Top 10 Users by Commit.");
+            System.Console.WriteLine("Top 10 Projects by Commits Count.");
             foreach (var topProjects in byProject)
             {
                 System.Console.WriteLine($"Project name: {topProjects.Name}, Commits count: {topProjects.Count}");
@@ -93,7 +93,7 @@ namespace TopContributor.Console
                     .GroupBy(x => x.UserName)
                     .Select(x => new {Name = x.Key, Count = x.Sum(y => y.Count)}).OrderByDescending(x => x.Count).Take(10);
 
-            System.Console.WriteLine("Top 10 Users by Commit.");
+            System.Console.WriteLine("Top 10 Users by Commits Count.");
             foreach (var topUsers in usersOrdered)
             {
                 System.Console.WriteLine($"Name: {topUsers.Name}, Commits count: {topUsers.Count}");
