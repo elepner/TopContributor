@@ -36,7 +36,7 @@ module.exports = {
             'powel-powelui/dist/powel-ui.css',
             'powel-powelui/dist/fonts/powel-icons.ttf',
             'powel-powelui/dist/fonts/powel-icons.woff',
-            'powel-powelui/dist/fonts/powel-ui-webfonts.woff.css'
+			'powel-powelui/dist/powel-ui-webfonts.woff.css'
         ]
     },
     output: {
