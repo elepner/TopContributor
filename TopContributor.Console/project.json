@@ -1,13 +1,14 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.1.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "debugType": "portable"
   },
 
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.1"
+      "version": "1.1.0"
     },
     "TopContributor.Common": "1.0.0-*"
   },
