@@ -9,9 +9,9 @@ namespace TopContributor.Common
     public class Project
     {
         [Newtonsoft.Json.JsonProperty("id")]
-        public String Name { get; set; }
+        public string Id { get; set; }
         [Newtonsoft.Json.JsonProperty("description")]
-        public String Description { get; set; }
+        public string Description { get; set; }
     }
 
     public class Commit
@@ -23,9 +23,15 @@ namespace TopContributor.Common
 
         [JsonProperty("subject")]
         public string Message { get; set; }
-        
-        public string Project { get; set; }
 
+        [JsonProperty("project")]
+        public string ProjectId { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public int Deletions { get; set; }
+
+        public int Insertions { get; set; }
     }
 
     public class User

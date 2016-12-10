@@ -96,7 +96,7 @@ namespace TopContributor.Console
             System.Console.WriteLine("Top 10 Users by Commits Count.");
             foreach (var topUsers in usersOrdered)
             {
-                System.Console.WriteLine($"Name: {topUsers.Name}, Commits count: {topUsers.Count}");
+                System.Console.WriteLine($"Id: {topUsers.Name}, Commits count: {topUsers.Count}");
             }
 
             if (_cacheUpdated)
