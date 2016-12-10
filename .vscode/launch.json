@@ -6,11 +6,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/<target-framework>/<project-name.dll>",
+            "program": "${workspaceRoot}/TopContributor.Console/bin/Debug/netcoreapp1.0/TopContributor.Console.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/TopContributor.Console",
             "stopAtEntry": false,
-            "externalConsole": false
+            "externalConsole": true
         },
         {
             "name": ".NET Core Launch (web)",

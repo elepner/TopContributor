@@ -10,8 +10,11 @@
             "taskName": "build",
             "args": [ ],
             "isBuildCommand": true,
-            "showOutput": "silent",
+            "showOutput": "always",
             "problemMatcher": "$msCompile"
         }
-    ]
+    ],
+    "options":{
+        "cwd": "${workspaceRoot}/TopContributor.Console"
+    }
 }
