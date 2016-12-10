@@ -6,13 +6,13 @@ using Newtonsoft.Json;
 
 namespace TopContributor.Gerrit
 {
-    public class Project
+    internal class Project
     {
         public string Id { get; set; }
         public string Description { get; set; }
     }
 
-    public class Commit
+    internal class Commit
     {
         public string Id { get; set; }
 
@@ -32,7 +32,7 @@ namespace TopContributor.Gerrit
         public int Insertions { get; set; }
     }
 
-    public class User
+    internal class User
     {
         [JsonProperty("_account_id")]
         public string Id { get; set; }

@@ -1,0 +1,28 @@
+<h1>Commits</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!commits"><em>Loading...</em></p>
+
+<table class='table' *ngIf="commits">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>AuthorId</th>
+            <th>ProjectId</th>
+            <th>Message</th>
+            <th>Insertions</th>
+            <th>Deletions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let commit of commits">
+            <td>{{ commit.created }}</td>
+            <td>{{ commit.author.fullName }}</td>
+            <td>{{ commit.projectId }}</td>
+            <td>{{ commit.message }}</td>
+            <td>{{ commit.insertions }}</td>
+            <td>{{ commit.deletions }}</td>
+
+    </tbody>
+</table>

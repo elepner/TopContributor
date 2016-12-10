@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TopContributor.Common.Model
 {
@@ -14,6 +15,7 @@ namespace TopContributor.Common.Model
 
         public string PrimaryEmail { get; set; }
 
+        [JsonIgnore]
         public List<Commit> Commits { get; set; }
 
         public List<RepoAccount> Accounts { get; set; }

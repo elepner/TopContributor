@@ -6,6 +6,7 @@ namespace TopContributor.Common.Model
     {
         public string Id { get; set; }
         public VCSRepository Source { get; set; }
+        
         public Person Author { get; set; }
         public int AuthorId { get; set; }
         public DateTime Created {get; set;}
