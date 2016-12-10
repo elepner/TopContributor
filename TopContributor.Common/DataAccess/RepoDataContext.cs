@@ -9,6 +9,7 @@ namespace TopContributor.Common.DataAccess
 {
     public class RepoDataContext : DbContext
     {
+
         public RepoDataContext(DbContextOptions<RepoDataContext> options)
             : base(options)
         { }
@@ -28,6 +29,17 @@ namespace TopContributor.Common.DataAccess
                 .HasOne(x => x.SourceRepository)
                 .WithMany(x => x.Accounts)
                 .HasForeignKey(x => x.SourceRepoId)
+                .HasPrincipalKey(x => x.Id);
+
+            modelBuilder.Entity<Model.RepoAccount>().HasOne(x => x.Person)
+                .WithMany(x => x.Accounts)
+                .HasForeignKey(x => x.PersonId)
+                .HasPrincipalKey(x => x.Id);
+
+            modelBuilder.Entity<Model.Commit>()
+                .HasOne(x => x.Author)
+                .WithMany(x => x.Commits)
+                .HasForeignKey(x => x.AuthorId)
                 .HasPrincipalKey(x => x.Id);
         }
 

@@ -8,5 +8,6 @@ namespace TopContributor.Common.Crawler
     public interface IRequestProvider
     {
         Task<string> ReadRequest(string apiPath);
+        string Id { get; }
     }
 }

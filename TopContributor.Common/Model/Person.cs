@@ -14,6 +14,8 @@ namespace TopContributor.Common.Model
 
         public string PrimaryEmail { get; set; }
 
+        public List<Commit> Commits { get; set; }
+
         public List<RepoAccount> Accounts { get; set; }
     }
 }

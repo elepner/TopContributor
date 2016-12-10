@@ -56,22 +56,31 @@ namespace TopContributor.Console
 
             var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=TopContributor.AspNetCore.NewDb;Trusted_Connection=True;";
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=TopContributor;Trusted_Connection=True;";
+            var connection =
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             optionsBuilder.UseSqlServer(connection);
 
+            var context = new RepoDataContext(optionsBuilder.Options);
 
-            using (var context = new RepoDataContext(optionsBuilder.Options))
-            {
-                var crawler = new RepoCrawler(context, gerritReader);
-                crawler.SyncData();
-            }
-            
+            //var rows = from o in context.Commits
+            //           select o;
+            //foreach (var row in rows)
+            //{
+            //    context.Commits.Remove(row);
+            //}
+            //context.SaveChanges();
+
+            var crawler = new RepoCrawler(context, gerritReader);
+            crawler.SyncData();
+
+
             //var result = await gerritCrawler.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15, 0, 0, 0)), DateTime.Now);
             //foreach (var resultCommit in result.Commits)
             //{
             //    System.Console.WriteLine(resultCommit);
             //}
         }
-        
+
     }
 }

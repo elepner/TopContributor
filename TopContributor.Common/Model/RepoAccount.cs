@@ -12,7 +12,10 @@ namespace TopContributor.Common.Model
         public string SourceRepoId { get; set; }
         public string AccountId { get; set; }
 
+        public int PersonId { get; set; }
         public VCSRepository SourceRepository { get; set; }
+
+        public Person Person { get; set; }
 
         public string Email { get; set; }
         public string Name { get; set; }

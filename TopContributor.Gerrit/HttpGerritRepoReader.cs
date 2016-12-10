@@ -37,6 +37,8 @@ namespace TopContributor.Gerrit
             return await httpResult.Content.ReadAsStringAsync();
         }
 
+        public string Id => _gerritUrl;
+
         public void Dispose()
         {
             Dispose(true);

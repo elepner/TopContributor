@@ -39,7 +39,9 @@ namespace TopContributor.Gerrit
                         Deletions = gerritCommit.Deletions,
                         Insertions = gerritCommit.Insertions,
                         Id = gerritCommit.Id,
-                        Message = gerritCommit.Message
+                        Message = gerritCommit.Message,
+                        Created = gerritCommit.Created,
+                        ProjectName = gerritCommit.Project
                     };
                     return crawlerCommit;
                 }),
@@ -66,6 +68,8 @@ namespace TopContributor.Gerrit
                 Name = gerritUser.Name
             };
         }
+
+        public string Id => $"{_repoReader.GetType().FullName}/{_repoReader.Id}";
 
         private async Task<string> ReadGerritRequest(string query)
         {

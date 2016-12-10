@@ -10,6 +10,7 @@ namespace TopContributor.Common.Crawler
         Task<CommitsQueryResult> QueryCommits(DateTime @from, DateTime to);
         Task<CommitDetail> GetCommitDetail(string commitId);
         Task<Author> GetAuthorDetail(string authorId);
+        string Id { get; }
     }
 
     public struct CommitsQueryResult
@@ -26,6 +27,7 @@ namespace TopContributor.Common.Crawler
         public int Deletions { get; set; }
         public string Message { get; set; }
         public string ProjectName { get; set; }
+        public DateTime Created { get; set; }
 
         public override string ToString()
         {

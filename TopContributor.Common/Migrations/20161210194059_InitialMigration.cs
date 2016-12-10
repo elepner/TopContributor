@@ -42,12 +42,11 @@ namespace TopContributor.Common.Migrations
                 name: "Commits",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AuthorId = table.Column<int>(nullable: true),
+                    Id = table.Column<string>(nullable: false),
+                    AuthorId = table.Column<int>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
-                    Deleted = table.Column<int>(nullable: false),
-                    Inserted = table.Column<int>(nullable: false),
+                    Deletions = table.Column<int>(nullable: false),
+                    Insertions = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
                     ProjectId = table.Column<string>(nullable: true),
                     SourceId = table.Column<string>(nullable: true)
@@ -60,7 +59,7 @@ namespace TopContributor.Common.Migrations
                         column: x => x.AuthorId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Commits_VCSRepositories_SourceId",
                         column: x => x.SourceId,
@@ -97,7 +96,7 @@ namespace TopContributor.Common.Migrations
                     AccountId = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    PersonId = table.Column<int>(nullable: true)
+                    PersonId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +106,7 @@ namespace TopContributor.Common.Migrations
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RepositoryAccounts_VCSRepositories_SourceRepoId",
                         column: x => x.SourceRepoId,
