@@ -36,7 +36,7 @@ namespace TopContributor
             var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             
             services.AddDbContext<RepoDataContext>(options => options.UseSqlServer(connection));
-            // Add framework services.
+            // Add framework services. Test
             services.AddMvc();
         }
 
