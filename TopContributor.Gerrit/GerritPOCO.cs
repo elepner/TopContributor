@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace TopContributor.Common
+namespace TopContributor.Gerrit
 {
     public class Project
     {
-        [Newtonsoft.Json.JsonProperty("id")]
         public string Id { get; set; }
-        [Newtonsoft.Json.JsonProperty("description")]
         public string Description { get; set; }
     }
 
