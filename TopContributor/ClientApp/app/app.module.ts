@@ -22,7 +22,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: '', redirectTo: 'counter', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
-            //{ path: 'fetch-data', component: FetchDataComponent },
+            { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
