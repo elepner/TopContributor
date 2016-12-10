@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TopContributor.Common.Crawler
 {
-    public interface IRepoReader
+    public interface IRequestProvider
     {
         Task<string> ReadRequest(string apiPath);
     }

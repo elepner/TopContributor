@@ -7,12 +7,15 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using TopContributor.Common.Crawler;
+using TopContributor.Common.DataAccess;
 using TopContributor.Gerrit;
 using User = TopContributor.Common.User;
-
 namespace TopContributor.Console
 {
     public class Program
@@ -48,13 +51,26 @@ namespace TopContributor.Console
         private static async Task DoRequest()
         {
             var gerritRepoReader = new HttpGerritRepoReader(_gerritUrl, _gerritUser, _gerritPwd);
-            var gerritCrawler = new GerritRopoCrawlerProvier(gerritRepoReader);
+            var gerritReader = new GerritRepoReader(gerritRepoReader);
 
-            var result = await gerritCrawler.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15, 0, 0, 0)), DateTime.Now);
-            foreach (var resultCommit in result.Commits)
+
+            var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=TopContributor.AspNetCore.NewDb;Trusted_Connection=True;";
+            optionsBuilder.UseSqlServer(connection);
+
+
+            using (var context = new RepoDataContext(optionsBuilder.Options))
             {
-                System.Console.WriteLine(resultCommit);
+                var crawler = new RepoCrawler(context, gerritReader);
+                crawler.SyncData();
             }
+            
+            //var result = await gerritCrawler.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15, 0, 0, 0)), DateTime.Now);
+            //foreach (var resultCommit in result.Commits)
+            //{
+            //    System.Console.WriteLine(resultCommit);
+            //}
         }
         
     }

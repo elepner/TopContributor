@@ -8,7 +8,7 @@ using TopContributor.Common.Crawler;
 
 namespace TopContributor.Gerrit
 {
-    public class HttpGerritRepoReader : IRepoReader, IDisposable
+    public class HttpGerritRepoReader : IRequestProvider, IDisposable
     {
         private readonly string _gerritUrl;
         private readonly HttpClient _httpClient;

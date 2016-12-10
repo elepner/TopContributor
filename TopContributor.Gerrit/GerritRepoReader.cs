@@ -11,13 +11,13 @@ using TopContributor.Common.Crawler;
 
 namespace TopContributor.Gerrit
 {
-    public class GerritRopoCrawlerProvier : IRopoCrawlerProvier
+    public class GerritRepoReader : IRepositoryReader
     {
-        private readonly IRepoReader _repoReader;
+        private readonly IRequestProvider _repoReader;
         private readonly JsonSerializer _jsonSerializer;
         private static readonly string GerritXssiProtectionPrefix = ")]}'";
 
-        public GerritRopoCrawlerProvier(IRepoReader repoReader)
+        public GerritRepoReader(IRequestProvider repoReader)
         {
             _repoReader = repoReader;
             _jsonSerializer = new JsonSerializer {ContractResolver = new CamelCasePropertyNamesContractResolver()};
