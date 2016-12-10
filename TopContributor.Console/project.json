@@ -10,7 +10,8 @@
       "type": "platform",
       "version": "1.1.0"
     },
-    "TopContributor.Common": "1.0.0-*"
+    "TopContributor.Common": "1.0.0-*",
+    "TopContributor.Gerrit": "1.0.0-*"
   },
 
   "frameworks": {

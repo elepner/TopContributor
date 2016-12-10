@@ -9,6 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using TopContributor.Common.Model;
+using Microsoft.EntityFrameworkCore;
+using TopContributor.Common.DataAccess;
+
 namespace TopContributor
 {
     public class Startup
@@ -29,6 +33,9 @@ namespace TopContributor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
+            
+            services.AddDbContext<RepoDataContext>(options => options.UseSqlServer(connection));
             // Add framework services.
             services.AddMvc();
         }

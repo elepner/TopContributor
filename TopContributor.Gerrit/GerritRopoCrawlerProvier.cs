@@ -11,13 +11,13 @@ using TopContributor.Common.Crawler;
 
 namespace TopContributor.Gerrit
 {
-    public class GerritCrawler : ICrawler
+    public class GerritRopoCrawlerProvier : IRopoCrawlerProvier
     {
         private readonly IRepoReader _repoReader;
         private readonly JsonSerializer _jsonSerializer;
         private static readonly string GerritXssiProtectionPrefix = ")]}'";
 
-        public GerritCrawler(IRepoReader repoReader)
+        public GerritRopoCrawlerProvier(IRepoReader repoReader)
         {
             _repoReader = repoReader;
             _jsonSerializer = new JsonSerializer {ContractResolver = new CamelCasePropertyNamesContractResolver()};
@@ -25,7 +25,7 @@ namespace TopContributor.Gerrit
 
         public async Task<CommitsQueryResult> QueryCommits(DateTime @from, DateTime to)
         {
-            string query = $"/changes/?q=before:{to:yyyy-MM-dd}+after:{from:yyyy-MM-dd}";
+            string query = $"changes/?q=before:{to:yyyy-MM-dd}+after:{from:yyyy-MM-dd}";
             var result = await ReadGerritRequest(query);
             
             var gerritCommits = JArray.Parse(result).ToObject<List<Commit>>(_jsonSerializer);
@@ -37,7 +37,9 @@ namespace TopContributor.Gerrit
                     {
                         AuthorId = gerritCommit.Author.Id,
                         Deletions = gerritCommit.Deletions,
-                        Inserted = gerritCommit.Insertions
+                        Insertions = gerritCommit.Insertions,
+                        Id = gerritCommit.Id,
+                        Message = gerritCommit.Message
                     };
                     return crawlerCommit;
                 }),

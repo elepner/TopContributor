@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TopContributor.Common.Crawler
 {
-    public interface ICrawler
+    public interface IRopoCrawlerProvier
     {
         Task<CommitsQueryResult> QueryCommits(DateTime @from, DateTime to);
         Task<CommitDetail> GetCommitDetail(string commitId);
@@ -20,10 +20,17 @@ namespace TopContributor.Common.Crawler
 
     public class Commit
     {
-        public string AuthorId { get; set; }
         public string Id { get; set; }
-        public int Inserted { get; set; }
+        public string AuthorId { get; set; }
+        public int Insertions { get; set; }
         public int Deletions { get; set; }
+        public string Message { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"Commit by author id: {AuthorId}, Message: {Message}, Insertions: {Insertions}, Deletions: {Deletions}";
+        }
     }
 
     public class Author

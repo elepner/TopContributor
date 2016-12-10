@@ -4,7 +4,7 @@ namespace TopContributor.Common.Model
 {
     public class Person
     {
-        public string Id {get; set;}
+        public int Id {get; set;}
 
         public string FirstName {get; set;}
 
@@ -12,6 +12,8 @@ namespace TopContributor.Common.Model
 
         public string FullName{get; set;}
 
-        public List<string> Emails {get; set;}
+        public string PrimaryEmail { get; set; }
+
+        public List<RepoAccount> Accounts { get; set; }
     }
 }
