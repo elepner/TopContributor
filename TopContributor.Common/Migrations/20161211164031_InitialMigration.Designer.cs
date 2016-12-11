@@ -8,7 +8,7 @@ using TopContributor.Common.DataAccess;
 namespace TopContributor.Common.Migrations
 {
     [DbContext(typeof(RepoDataContext))]
-    [Migration("20161211104135_InitialMigration")]
+    [Migration("20161211164031_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,24 +45,6 @@ namespace TopContributor.Common.Migrations
                     b.HasIndex("VSCRepositoryId", "VSCAuthorAccountId");
 
                     b.ToTable("Commits");
-                });
-
-            modelBuilder.Entity("TopContributor.Common.Model.Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("FullName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PrimaryEmail");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("TopContributor.Common.Model.Project", b =>
@@ -104,6 +86,24 @@ namespace TopContributor.Common.Migrations
                     b.ToTable("RepositoryAccounts");
                 });
 
+            modelBuilder.Entity("TopContributor.Common.Model.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PrimaryEmail");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Persons");
+                });
+
             modelBuilder.Entity("TopContributor.Common.Model.VCSRepository", b =>
                 {
                     b.Property<string>("Id")
@@ -138,7 +138,7 @@ namespace TopContributor.Common.Migrations
 
             modelBuilder.Entity("TopContributor.Common.Model.RepoAccount", b =>
                 {
-                    b.HasOne("TopContributor.Common.Model.Person", "Person")
+                    b.HasOne("TopContributor.Common.Model.User", "User")
                         .WithMany("Accounts")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade);

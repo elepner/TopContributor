@@ -33,10 +33,10 @@ namespace TopContributor.Controllers
             var result = _context.Commits.Where(x => x.Created > after)
                 .OrderByDescending(x => x.Created)
                 .Include(x => x.AuthorRepoAccount)
-                .Include(x => x.AuthorRepoAccount.Person)
+                .Include(x => x.AuthorRepoAccount.User)
                 .ToArray().Select(commit =>
                 {
-                    commit.AuthorRepoAccount.Person.Accounts = null;
+                    commit.AuthorRepoAccount.User.Accounts = null;
                     return new
                     {
                         CommitId = commit.Id,
@@ -45,7 +45,7 @@ namespace TopContributor.Controllers
                         commit.Created,
                         commit.Insertions,
                         commit.Deletions,
-                        Author = commit.AuthorRepoAccount.Person,
+                        Author = commit.AuthorRepoAccount.User,
                         Project = commit.ProjectId
                     };
                 }).ToArray();

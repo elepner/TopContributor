@@ -17,7 +17,7 @@ namespace TopContributor.Common.Model
         public int PersonId { get; set; }
         public VCSRepository SourceRepository { get; set; }
 
-        public Person Person { get; set; }
+        public User User { get; set; }
 
         public string CommitId { get; set; }
         [JsonIgnore]

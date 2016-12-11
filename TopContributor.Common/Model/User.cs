@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace TopContributor.Common.Model
 {
-    public class Person
+    public class User
     {
         public int Id {get; set;}
 

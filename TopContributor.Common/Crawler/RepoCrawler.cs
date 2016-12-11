@@ -50,7 +50,7 @@ namespace TopContributor.Common.Crawler
                 {
                     var authorId = crawlerCommit.AuthorId;
                     var account = _repoDataContext.RepositoryAccounts.Find(repository.Id, authorId);
-                    Person person;
+                    Model.User user;
 
                     var c = _repoDataContext.Commits.Find(crawlerCommit.Id);
                     if (c != null)
@@ -72,18 +72,18 @@ namespace TopContributor.Common.Crawler
                         };
                         _repoDataContext.RepositoryAccounts.Add(account);
 
-                        person = new Person
+                        user = new Model.User
                         {
                             Accounts = new List<RepoAccount> {account},
                             FullName = account.Name
                         };
-                        _repoDataContext.Persons.Add(person);
+                        _repoDataContext.Persons.Add(user);
                     }
                     else
                     {
-                        person = _repoDataContext.Persons.Find(account.PersonId);
+                        user = _repoDataContext.Persons.Find(account.PersonId);
                     }
-                    if (person == null)
+                    if (user == null)
                     {
                         Console.WriteLine("Error, cannot find person");
                         continue;

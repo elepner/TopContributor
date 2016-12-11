@@ -31,7 +31,7 @@ namespace TopContributor.Common.DataAccess
                 .HasForeignKey(x => x.SourceRepoId)
                 .HasPrincipalKey(x => x.Id);
 
-            modelBuilder.Entity<Model.RepoAccount>().HasOne(x => x.Person)
+            modelBuilder.Entity<Model.RepoAccount>().HasOne(x => x.User)
                 .WithMany(x => x.Accounts)
                 .HasForeignKey(x => x.PersonId)
                 .HasPrincipalKey(x => x.Id);
@@ -50,7 +50,7 @@ namespace TopContributor.Common.DataAccess
         }
 
         public DbSet<Model.Commit> Commits { get; set; }
-        public DbSet<Model.Person> Persons { get; set; }
+        public DbSet<Model.User> Persons { get; set; }
         public DbSet<Model.RepoAccount> RepositoryAccounts { get; set; }
         public DbSet<Model.VCSRepository> VCSRepositories { get; set; }
         public DbSet<Model.Project> Projects { get; set; }
