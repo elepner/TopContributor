@@ -6,9 +6,12 @@ namespace TopContributor.Common.Model
     {
         public string Id { get; set; }
         public VCSRepository Source { get; set; }
-        
-        public Person Author { get; set; }
-        public int AuthorId { get; set; }
+
+        /*Composite foreign key to reference author's repo accout*/
+        public string VSCRepositoryId { get; set; }
+        public string VSCAuthorAccountId { get; set; }
+        public RepoAccount AuthorRepoAccount { get; set; }
+
         public DateTime Created {get; set;}
         public string ProjectId { get; set; }
         public int Insertions {get; set;}

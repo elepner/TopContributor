@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TopContributor.Common.Model
 {
     public class RepoAccount
     {
+        /*Composite primary key*/
         public string SourceRepoId { get; set; }
         public string AccountId { get; set; }
 
@@ -16,6 +18,10 @@ namespace TopContributor.Common.Model
         public VCSRepository SourceRepository { get; set; }
 
         public Person Person { get; set; }
+
+        public string CommitId { get; set; }
+        [JsonIgnore]
+        public List<Commit> Commits { get; set; }
 
         public string Email { get; set; }
         public string Name { get; set; }

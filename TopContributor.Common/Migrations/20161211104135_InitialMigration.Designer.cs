@@ -8,7 +8,7 @@ using TopContributor.Common.DataAccess;
 namespace TopContributor.Common.Migrations
 {
     [DbContext(typeof(RepoDataContext))]
-    [Migration("20161210194059_InitialMigration")]
+    [Migration("20161211104135_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,8 +22,6 @@ namespace TopContributor.Common.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AuthorId");
-
                     b.Property<DateTime>("Created");
 
                     b.Property<int>("Deletions");
@@ -36,11 +34,15 @@ namespace TopContributor.Common.Migrations
 
                     b.Property<string>("SourceId");
 
+                    b.Property<string>("VSCAuthorAccountId");
+
+                    b.Property<string>("VSCRepositoryId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("SourceId");
+
+                    b.HasIndex("VSCRepositoryId", "VSCAuthorAccountId");
 
                     b.ToTable("Commits");
                 });
@@ -87,6 +89,8 @@ namespace TopContributor.Common.Migrations
 
                     b.Property<string>("AccountId");
 
+                    b.Property<string>("CommitId");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("Name");
@@ -116,14 +120,13 @@ namespace TopContributor.Common.Migrations
 
             modelBuilder.Entity("TopContributor.Common.Model.Commit", b =>
                 {
-                    b.HasOne("TopContributor.Common.Model.Person", "Author")
-                        .WithMany("Commits")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("TopContributor.Common.Model.VCSRepository", "Source")
                         .WithMany()
                         .HasForeignKey("SourceId");
+
+                    b.HasOne("TopContributor.Common.Model.RepoAccount", "AuthorRepoAccount")
+                        .WithMany("Commits")
+                        .HasForeignKey("VSCRepositoryId", "VSCAuthorAccountId");
                 });
 
             modelBuilder.Entity("TopContributor.Common.Model.Project", b =>

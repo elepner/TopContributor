@@ -69,7 +69,7 @@ namespace TopContributor.Gerrit
             };
         }
 
-        public string Id => $"{_repoReader.GetType().FullName}/{_repoReader.Id}";
+        public string Id => $"{_repoReader.GetType().FullName}@{_repoReader.Id}";
 
         private async Task<string> ReadGerritRequest(string query)
         {

@@ -9,25 +9,26 @@ export class CommitsComponent {
     public commits: Commit[];
 
     constructor(http: Http) {
-        http.get('/api/Commits?days=10').subscribe(result => {
+        http.get('/api/Commits?days=30').subscribe(result => {
             this.commits = result.json();
         });
     }
 }
 
+
 interface Commit {
     id: string,
     authorId: number,
+    author: Person,
     created: number,
     projectId: string,
     deletions: number,
     insertions: number,
     message: string,
-    author: Author,
+    commiterId: string,
 }
 
-interface Author {
+interface Person {
     id: number,
-    fullName: string,
-    primaryEmail: string
+    fullName: string
 }

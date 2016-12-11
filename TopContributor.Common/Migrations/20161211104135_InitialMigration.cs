@@ -39,36 +39,6 @@ namespace TopContributor.Common.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Commits",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AuthorId = table.Column<int>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Deletions = table.Column<int>(nullable: false),
-                    Insertions = table.Column<int>(nullable: false),
-                    Message = table.Column<string>(nullable: true),
-                    ProjectId = table.Column<string>(nullable: true),
-                    SourceId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Commits", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Commits_Persons_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Persons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Commits_VCSRepositories_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "VCSRepositories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
@@ -94,6 +64,7 @@ namespace TopContributor.Common.Migrations
                 {
                     SourceRepoId = table.Column<string>(nullable: false),
                     AccountId = table.Column<string>(nullable: false),
+                    CommitId = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     PersonId = table.Column<int>(nullable: false)
@@ -115,15 +86,46 @@ namespace TopContributor.Common.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Commits_AuthorId",
-                table: "Commits",
-                column: "AuthorId");
+            migrationBuilder.CreateTable(
+                name: "Commits",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Deletions = table.Column<int>(nullable: false),
+                    Insertions = table.Column<int>(nullable: false),
+                    Message = table.Column<string>(nullable: true),
+                    ProjectId = table.Column<string>(nullable: true),
+                    SourceId = table.Column<string>(nullable: true),
+                    VSCAuthorAccountId = table.Column<string>(nullable: true),
+                    VSCRepositoryId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Commits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Commits_VCSRepositories_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "VCSRepositories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Commits_RepositoryAccounts_VSCRepositoryId_VSCAuthorAccountId",
+                        columns: x => new { x.VSCRepositoryId, x.VSCAuthorAccountId },
+                        principalTable: "RepositoryAccounts",
+                        principalColumns: new[] { "SourceRepoId", "AccountId" },
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Commits_SourceId",
                 table: "Commits",
                 column: "SourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Commits_VSCRepositoryId_VSCAuthorAccountId",
+                table: "Commits",
+                columns: new[] { "VSCRepositoryId", "VSCAuthorAccountId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_SourceRepoId",

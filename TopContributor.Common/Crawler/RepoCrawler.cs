@@ -93,7 +93,9 @@ namespace TopContributor.Common.Crawler
                     var commit = new Model.Commit
                     {
                         Id = crawlerCommit.Id,
-                        Author = person,
+                        VSCAuthorAccountId = account.AccountId,
+                        VSCRepositoryId = repository.Id,
+                        AuthorRepoAccount = account,
                         Created = crawlerCommit.Created,
                         Deletions = crawlerCommit.Deletions,
                         Insertions = crawlerCommit.Insertions,

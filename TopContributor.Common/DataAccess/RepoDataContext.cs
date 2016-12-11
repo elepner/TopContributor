@@ -37,10 +37,16 @@ namespace TopContributor.Common.DataAccess
                 .HasPrincipalKey(x => x.Id);
 
             modelBuilder.Entity<Model.Commit>()
-                .HasOne(x => x.Author)
+                .HasOne(x => x.AuthorRepoAccount)
                 .WithMany(x => x.Commits)
-                .HasForeignKey(x => x.AuthorId)
-                .HasPrincipalKey(x => x.Id);
+                .HasForeignKey(x => new {x.VSCRepositoryId, x.VSCAuthorAccountId})
+                .HasPrincipalKey(x => new {x.SourceRepoId, x.AccountId});
+
+            //modelBuilder.Entity<Model.Commit>()
+            //    .HasOne(x => x.Author)
+            //    .WithMany(x => x.Commits)
+            //    .HasForeignKey(x => x.AuthorId)
+            //    .HasPrincipalKey(x => x.Id);
         }
 
         public DbSet<Model.Commit> Commits { get; set; }
