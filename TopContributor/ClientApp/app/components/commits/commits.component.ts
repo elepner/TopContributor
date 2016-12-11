@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import Model = require("../../model/model");
 
 @Component({
     selector: 'commits-review',
     template: require('./commits.component.html')
 })
 export class CommitsComponent {
-    public commits: Commit[];
+    public commits: Model.Commit[];
 
     constructor(http: Http) {
         http.get('/api/Commits?days=30').subscribe(result => {
@@ -15,20 +16,3 @@ export class CommitsComponent {
     }
 }
 
-
-interface Commit {
-    id: string,
-    authorId: number,
-    author: Person,
-    created: number,
-    projectId: string,
-    deletions: number,
-    insertions: number,
-    message: string,
-    commiterId: string,
-}
-
-interface Person {
-    id: number,
-    fullName: string
-}

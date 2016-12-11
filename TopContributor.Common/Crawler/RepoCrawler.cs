@@ -77,11 +77,11 @@ namespace TopContributor.Common.Crawler
                             Accounts = new List<RepoAccount> {account},
                             FullName = account.Name
                         };
-                        _repoDataContext.Persons.Add(user);
+                        _repoDataContext.Users.Add(user);
                     }
                     else
                     {
-                        user = _repoDataContext.Persons.Find(account.PersonId);
+                        user = _repoDataContext.Users.Find(account.PersonId);
                     }
                     if (user == null)
                     {

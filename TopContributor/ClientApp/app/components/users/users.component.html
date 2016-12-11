@@ -1,10 +1,15 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<h1>Users List</h1>
+<p *ngIf="!users"><em>Loading...</em></p>
+<div class="grid grid--arrange grid--border" *ngIf="users">
+    <div class="grid-row navy100">
+        <div class="grid-cell">Id</div>
+        <div class="grid-cell">Name</div>
+        <div class="grid-cell">Email</div>
+    </div>
 
-</body>
-</html>
+    <div class="grid-row" *ngFor="let user of users">
+        <div class="grid-cell">{{user.id}}</div>
+        <div class="grid-cell">{{user.fullName}}</div>
+        <div class="grid-cell">{{user.email}}</div>
+    </div>
+</div>

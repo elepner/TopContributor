@@ -50,7 +50,7 @@ namespace TopContributor.Common.DataAccess
         }
 
         public DbSet<Model.Commit> Commits { get; set; }
-        public DbSet<Model.User> Persons { get; set; }
+        public DbSet<Model.User> Users { get; set; }
         public DbSet<Model.RepoAccount> RepositoryAccounts { get; set; }
         public DbSet<Model.VCSRepository> VCSRepositories { get; set; }
         public DbSet<Model.Project> Projects { get; set; }

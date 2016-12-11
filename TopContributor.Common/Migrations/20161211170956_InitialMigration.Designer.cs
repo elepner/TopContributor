@@ -8,7 +8,7 @@ using TopContributor.Common.DataAccess;
 namespace TopContributor.Common.Migrations
 {
     [DbContext(typeof(RepoDataContext))]
-    [Migration("20161211164031_InitialMigration")]
+    [Migration("20161211170956_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,7 @@ namespace TopContributor.Common.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TopContributor.Common.Model.VCSRepository", b =>

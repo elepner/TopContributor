@@ -100,7 +100,7 @@ namespace TopContributor.Common.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TopContributor.Common.Model.VCSRepository", b =>

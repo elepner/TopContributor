@@ -10,7 +10,7 @@ namespace TopContributor.Common.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Persons",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -22,7 +22,7 @@ namespace TopContributor.Common.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,9 +73,9 @@ namespace TopContributor.Common.Migrations
                 {
                     table.PrimaryKey("PK_RepositoryAccounts", x => new { x.SourceRepoId, x.AccountId });
                     table.ForeignKey(
-                        name: "FK_RepositoryAccounts_Persons_PersonId",
+                        name: "FK_RepositoryAccounts_Users_PersonId",
                         column: x => x.PersonId,
-                        principalTable: "Persons",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -150,7 +150,7 @@ namespace TopContributor.Common.Migrations
                 name: "RepositoryAccounts");
 
             migrationBuilder.DropTable(
-                name: "Persons");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "VCSRepositories");
