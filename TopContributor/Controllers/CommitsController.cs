@@ -19,7 +19,13 @@ namespace TopContributor.Controllers
         {
             _context = context;
         }
-        
+
+        [HttpGet("stats")]
+        public int CommitsCount()
+        {
+            return _context.Commits.Count();
+        }
+
         [HttpGet]
         public IActionResult GetCommits(int days = 1)
         {

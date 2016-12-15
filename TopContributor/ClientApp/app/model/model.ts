@@ -10,6 +10,11 @@
     commiterId: string,
 }
 
+export interface UserStat {
+    user: User,
+    count: number,
+}
+
 export interface User {
     id: number,
     firstName: string,

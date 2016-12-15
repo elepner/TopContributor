@@ -1,18 +1,59 @@
 <div class="section">
-    <h1 class="mTn" id="overview">Overview<a href="#overview" class="header-anchor"><span class="fa fa-link"></span></a></h1>
-    <div class="documentation info measure">
-        <p>
-            PowelUI is a tailor-made library of powerful user interface components, behaviors and
-            utilities for the responsive and modern day web. It provides you
-            with a set of reusable building blocks that establish an extensible design system.
-            These building blocks can be assembled to form user interfaces of multiple web applications.
-        </p>
-        <p>
-            <strong>PowelUI is everything you need to get started building UI at Powel</strong>. It serves both developers and designers.
-            It enables the former to implement consistent user interfaces much faster using a range of pre-built components,
-            while the latter can quickly compose new prototypes by selecting existing materials—without getting lost in specifics.
-            It's a huge win for reduced dev and design effort.
-        </p>
+    <h1 class="mTn" id="overview">Powel Company Repo Pulse<a href="#overview" class="header-anchor"><span class="fa fa-link"></span></a></h1>
+    Now the database contains {{commitsCount}} commits
+    <h2>Last 7 days top contributors</h2>
+    <p *ngIf="!top7"><em>Loading...</em></p>
+    <div class="grid grid--arrange grid--border" *ngIf="top7">
+        <div class="grid-row navy100">
+            <div class="grid-cell">Position</div>
+            <div class="grid-cell">Name</div>
+            <div class="grid-cell">Numbers Of Commit</div>
+            <div class="grid-cell">Id</div>
+        </div>
+
+        <div class="grid-row" *ngFor="let userInfo of top7;let i = index">
+            <div class="grid-cell">{{i + 1}}</div>
+            <div class="grid-cell">{{userInfo.user.fullName}}</div>
+            <div class="grid-cell">{{userInfo.count}}</div>
+            <div class="grid-cell">{{userInfo.user.id}}</div>
+        </div>
     </div>
 
+    
+    <h2>Last 30 days top contributors</h2>
+    <p *ngIf="!top30"><em>Loading...</em></p>
+    <div class="grid grid--arrange grid--border" *ngIf="top30">
+        <div class="grid-row navy100">
+            <div class="grid-cell">Position</div>
+            <div class="grid-cell">Name</div>
+            <div class="grid-cell">Numbers Of Commit</div>
+            <div class="grid-cell">Id</div>
+        </div>
+
+        <div class="grid-row" *ngFor="let userInfo of top30;let i = index">
+            <div class="grid-cell">{{i + 1}}</div>
+            <div class="grid-cell">{{userInfo.user.fullName}}</div>
+            <div class="grid-cell">{{userInfo.count}}</div>
+            <div class="grid-cell">{{userInfo.user.id}}</div>
+        </div>
+    </div>    
+
+    <h2>Top Contributors of Enternity</h2>
+    <p *ngIf="!top"><em>Loading...</em></p>
+    <div class="grid grid--arrange grid--border" *ngIf="top">
+        <div class="grid-row navy100">
+            <div class="grid-cell">Position</div>
+            <div class="grid-cell">Name</div>
+            <div class="grid-cell">Numbers Of Commit</div>
+            <div class="grid-cell">Id</div>
+        </div>
+
+        <div class="grid-row" *ngFor="let userInfo of top;let i = index">
+            <div class="grid-cell">{{i + 1}}</div>
+            <div class="grid-cell">{{userInfo.user.fullName}}</div>
+            <div class="grid-cell">{{userInfo.count}}</div>
+            <div class="grid-cell">{{userInfo.user.id}}</div>
+        </div>
+    </div>    
+    
 </div>

@@ -17,6 +17,34 @@ namespace TopContributor.Controllers
         {
         }
 
+        [HttpGet("top")]
+        public IActionResult TopUsers(int days, int limit = -1)
+        {
+
+            var startDate = DateTime.Now.Subtract(new TimeSpan(days, 0, 0, 0));
+
+            var q = from u in Context.Users
+                    join account in Context.RepositoryAccounts on u.Id equals account.PersonId
+                    join commit in Context.Commits on new { a = account.AccountId, b = account.SourceRepoId }
+                    equals new { a = commit.VSCAuthorAccountId, b = commit.VSCRepositoryId }
+                    where commit.Created >= startDate group new {u, commit} by u.Id into gr
+                    let user = gr.FirstOrDefault().u
+                    let count = gr.Count()
+                    orderby count descending 
+                    select new
+                    {
+                        user,
+                        count
+                    };
+
+            if (limit > 0)
+            {
+                q = q.Take(limit);
+            }
+            
+            return new OkObjectResult(q);
+        }
+
         [HttpGet]
         public IEnumerable<User> GetUsers(int limit = -1)
         {
