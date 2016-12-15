@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace TopContributor.Common.Model
 {
@@ -10,6 +11,8 @@ namespace TopContributor.Common.Model
         /*Composite foreign key to reference author's repo accout*/
         public string VSCRepositoryId { get; set; }
         public string VSCAuthorAccountId { get; set; }
+
+        [JsonIgnore]
         public RepoAccount AuthorRepoAccount { get; set; }
 
         public DateTime Created {get; set;}

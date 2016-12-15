@@ -21,7 +21,6 @@ namespace TopContributor.Common.Model
         public User User { get; set; }
 
         public string CommitId { get; set; }
-        [JsonIgnore]
         public List<Commit> Commits { get; set; }
 
         public string Email { get; set; }

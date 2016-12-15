@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Remotion.Linq.Clauses;
 using TopContributor.Common.DataAccess;
 using TopContributor.Common.Model;
 
@@ -26,9 +28,26 @@ namespace TopContributor.Controllers
         }
 
         [HttpGet("{id}")]
-        public User GetUser(int id)
+        public IActionResult GetUser(int id)
         {
-            return Context.Users.Find(id);
+            var user = Context.Users.Include(x => x.Accounts)
+                .ThenInclude(x => x.Commits)
+                .FirstOrDefault(x => x.Id == id);
+
+            var q = from u in Context.Users
+                    join account in Context.RepositoryAccounts on u.Id equals account.PersonId
+                    join commit in Context.Commits on new { a = account.AccountId, b = account.SourceRepoId }
+                    equals new { a = commit.VSCAuthorAccountId, b = commit.VSCRepositoryId }
+                    where u.Id == id
+                    select new
+                    {
+                        u,
+                        commit
+                    };
+
+            var arr = q.ToArray();
+
+            return new OkObjectResult(user);
         }
     }
 }

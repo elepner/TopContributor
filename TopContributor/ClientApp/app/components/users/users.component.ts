@@ -10,7 +10,7 @@ export class UsersComponent {
     users: Model.User[];
     constructor(http: Http) {
         http.get('/api/Users').subscribe(result => {
-            this.users =result.json();
+            this.users = result.json();
         });
     }
 }
