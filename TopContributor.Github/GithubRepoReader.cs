@@ -34,7 +34,7 @@ namespace TopContributor.Github
                 string reposListQuery = $"orgs/{_orgName}/repos";
                 var response = await _githubApiProvider.ReadRequest(reposListQuery);
                 JArray jArray = JArray.Parse(response);
-                _projects = jArray.ToObject<GithubProject[]>();
+                _projects = jArray.ToObject<GithubProject[]>(_jsonSerializer);
             }
             var queryTasks = _projects.Where(x => x.Created <= to)
                 .Select(async x =>
@@ -53,7 +53,7 @@ namespace TopContributor.Github
             var tasks = results.Select(r => new
                 {
                     r.Repo,
-                    Commits = JArray.Parse(r.Result).ToObject<GithubCommit[]>()
+                    Commits = JArray.Parse(r.Result).ToObject<GithubCommit[]>(_jsonSerializer)
                 }).Select(obj =>
                 {
 
@@ -64,7 +64,7 @@ namespace TopContributor.Github
                 .Select(async x =>
                 {
                     var githubCommit =
-                        JObject.Parse(await _githubApiProvider.ReadRequest(x.Url)).ToObject<GithubCommit>();
+                        JObject.Parse(await _githubApiProvider.ReadRequest(x.Url)).ToObject<GithubCommit>(_jsonSerializer);
                     var crawlerCommit = githubCommit.ToModelCommit();
                     crawlerCommit.ProjectName = x.Name;
 

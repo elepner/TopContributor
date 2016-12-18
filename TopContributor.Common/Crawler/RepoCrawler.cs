@@ -59,7 +59,7 @@ namespace TopContributor.Common.Crawler
                     }
                     if (account == null)
                     {
-                        var accountInfo = await _repoReader.GetAuthorDetail(authorId);
+                        var accountInfo = crawlerCommit.Author ?? await _repoReader.GetAuthorDetail(authorId);
                         if (accountInfo == null) continue;
 
                         account = new RepoAccount

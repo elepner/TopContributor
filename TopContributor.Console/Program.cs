@@ -53,21 +53,21 @@ namespace TopContributor.Console
 
             var githubreader = new GithubApiProvider(_githubAccessToken);
             var githubRepoReader = new GithubRepoReader(githubreader, "PowelAS");
-            await githubRepoReader.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15,0,0,0)), DateTime.Now);
+            //await githubRepoReader.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15,0,0,0)), DateTime.Now);
             //var gerritRepoReader = new HttpGerritRepoReader(_gerritUrl, _gerritUser, _gerritPwd);
             //var gerritReader = new GerritRepoReader(gerritRepoReader);
 
 
-            //var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
 
-            //var connection =
-            //    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            //optionsBuilder.UseSqlServer(connection);
+            var connection =
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            optionsBuilder.UseSqlServer(connection);
 
-            //var context = new RepoDataContext(optionsBuilder.Options);
+            var context = new RepoDataContext(optionsBuilder.Options);
 
-            //var crawler = new RepoCrawler(context, gerritReader);
-            //await crawler.SyncData();
+            var crawler = new RepoCrawler(context, githubRepoReader);
+            await crawler.SyncData();
         }
 
     }

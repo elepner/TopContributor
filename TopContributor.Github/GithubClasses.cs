@@ -23,18 +23,17 @@ namespace TopContributor.Github
 
         public Commit ToModelCommit()
         {
-            ;
             var authorId = Author != null ? Author.Login : Commit.Author.Email;
-            var commit = new Commit()
+            var commit = new Commit
             {
                 Id = Sha,
                 AuthorId = authorId,
                 Message = Commit.Message,
                 Created = Commit.Author.Date,
+                CommitDetails = new CommitDetails(),
+                Insertions = Stats.Additions,
+                Deletions = Stats.Deletions,
             };
-            commit.CommitDetails = new CommitDetails();
-            commit.Insertions = Stats.Additions;
-            commit.Deletions = Stats.Deletions;
             commit.CommitDetails.AffectedFiles = Files.Select(x => new FileInfo
             {
                 Deletions = x.Deletions,
