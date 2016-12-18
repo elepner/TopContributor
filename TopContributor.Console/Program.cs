@@ -15,71 +15,59 @@ using Newtonsoft.Json.Serialization;
 using TopContributor.Common.Crawler;
 using TopContributor.Common.DataAccess;
 using TopContributor.Gerrit;
+using TopContributor.Github;
 using User = TopContributor.Common.User;
 namespace TopContributor.Console
 {
     public class Program
     {
-        private static readonly string GerritXssiProtectionPrefix = ")]}'";
-        private static readonly string CommitsDumpFilePath = "./dump.json";
-        private static readonly string AuthorsInfoDumpFilePath = "./authors.json";
-        private static Dictionary<string, User> _usersCache = new Dictionary<string, User>();
+        
         private static string _gerritUrl;
         private static string _gerritUser;
         private static string _gerritPwd;
-        private static HttpClient _httpClient;
-        private static bool _cacheUpdated = false;
+        private static string _githubAccessToken;
 
         public static void Main(string[] args)
         {
-            if (args.Length < 3)
-            {
-                System.Console.WriteLine("Specify gerrit URL, gerrit user and gerrit HTTP password in the parameters.");
-                System.Console.ReadKey();
-                return;
-            }
+            //if (args.Length < 3)
+            //{
+            //    System.Console.WriteLine("Specify gerrit URL, gerrit user and gerrit HTTP password in the parameters.");
+            //    System.Console.ReadKey();
+            //    return;
+            //}
 
-            _gerritUrl = args[0];
-            _gerritUser = args[1];
-            _gerritPwd = args[2];
-            
+            //_gerritUrl = args[0];
+            //_gerritUser = args[1];
+            //_gerritPwd = args[2];
+
+            _githubAccessToken = args[3];
             
             DoRequest().Wait();
+
+            
             System.Console.ReadKey();
         }
 
         private static async Task DoRequest()
         {
-            var gerritRepoReader = new HttpGerritRepoReader(_gerritUrl, _gerritUser, _gerritPwd);
-            var gerritReader = new GerritRepoReader(gerritRepoReader);
+
+            var githubreader = new GithubApiProvider(_githubAccessToken);
+            var githubRepoReader = new GithubRepoReader(githubreader, "PowelAS");
+            await githubRepoReader.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15,0,0,0)), DateTime.Now);
+            //var gerritRepoReader = new HttpGerritRepoReader(_gerritUrl, _gerritUser, _gerritPwd);
+            //var gerritReader = new GerritRepoReader(gerritRepoReader);
 
 
-            var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
+            //var optionsBuilder = new DbContextOptionsBuilder<RepoDataContext>();
 
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=TopContributor;Trusted_Connection=True;";
-            var connection =
-                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            optionsBuilder.UseSqlServer(connection);
+            //var connection =
+            //    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TopContributor2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //optionsBuilder.UseSqlServer(connection);
 
-            var context = new RepoDataContext(optionsBuilder.Options);
+            //var context = new RepoDataContext(optionsBuilder.Options);
 
-            //var rows = from o in context.Commits
-            //           select o;
-            //foreach (var row in rows)
-            //{
-            //    context.Commits.Remove(row);
-            //}
-            //context.SaveChanges();
-
-            var crawler = new RepoCrawler(context, gerritReader);
-            crawler.SyncData();
-
-
-            //var result = await gerritCrawler.QueryCommits(DateTime.Now.Subtract(new TimeSpan(15, 0, 0, 0)), DateTime.Now);
-            //foreach (var resultCommit in result.Commits)
-            //{
-            //    System.Console.WriteLine(resultCommit);
-            //}
+            //var crawler = new RepoCrawler(context, gerritReader);
+            //await crawler.SyncData();
         }
 
     }

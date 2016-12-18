@@ -50,7 +50,7 @@ namespace TopContributor.Gerrit
             return commitsQueryResult;
         }
 
-        public Task<CommitDetail> GetCommitDetail(string commitId)
+        public Task<CommitDetails> GetCommitDetail(string commitId)
         {
             throw new NotImplementedException();
         }

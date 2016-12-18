@@ -19,7 +19,7 @@ namespace TopContributor.Common.Crawler
             _repoReader = repositoryReader;
         }
 
-        public async void SyncData()
+        public async Task SyncData()
         {
             
 
